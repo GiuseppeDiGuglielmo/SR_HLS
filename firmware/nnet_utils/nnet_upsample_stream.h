@@ -12,17 +12,18 @@ void upsample_channels(
     hls::stream<dataout_T> &resized
 ) {
 	assert(dataout_T::size % datain_T::size == 0);
-	constexpr unsigned ratio = dataout_T::size % datain_T::size;
+	constexpr unsigned ratio = dataout_T::size / datain_T::size;
 
 	datain_T  in_data = image.read();
     dataout_T out_data;
 
-    ChanIter: for (unsigned i = 0; i < datain_T::size; i++) {
+    Upsample: for (unsigned r = 0; r < ratio; r++) {
         #pragma HLS UNROLL
-        const unsigned outbase = i * ratio;
-        Upsample: for (unsigned r = 0; r < ratio; r++) {
+        const unsigned outbase = r * datain_T::size;
+
+        ChanIter: for (unsigned i = 0; i < datain_T::size; i++) {
             #pragma HLS UNROLL
-            const unsigned outidx = outbase + r;
+            const unsigned outidx = outbase + i;
             out_data[outidx] = in_data[i];
         }
     }
