@@ -1,0 +1,98 @@
+Backend: Vivado
+ClockPeriod: 10
+HLSConfig:
+  LayerName:
+    conv2d:
+      Precision:
+        bias: ap_fixed<16,6>
+        result: ap_fixed<16,6>
+        weight: ap_fixed<16,6>
+      ReuseFactor: 8
+    conv2d_1:
+      Precision:
+        bias: ap_fixed<16,6>
+        result: ap_fixed<16,6>
+        weight: ap_fixed<16,6>
+      ReuseFactor: 8
+    conv2d_1_relu:
+      Precision: ap_fixed<16,6>
+      ReuseFactor: 8
+      table_size: 1024
+      table_t: ap_fixed<18,8>
+    conv2d_2:
+      Precision:
+        bias: ap_fixed<16,6>
+        result: ap_fixed<16,6>
+        weight: ap_fixed<16,6>
+      ReuseFactor: 8
+    conv2d_2_relu:
+      Precision: ap_fixed<16,6>
+      ReuseFactor: 8
+      table_size: 1024
+      table_t: ap_fixed<18,8>
+    conv2d_3:
+      Precision:
+        bias: ap_fixed<16,6>
+        result: ap_fixed<16,6>
+        weight: ap_fixed<16,6>
+      ReuseFactor: 8
+    conv2d_3_relu:
+      Precision: ap_fixed<16,6>
+      ReuseFactor: 8
+      table_size: 1024
+      table_t: ap_fixed<18,8>
+    conv2d_4:
+      Precision:
+        bias: ap_fixed<16,6>
+        result: ap_fixed<16,6>
+        weight: ap_fixed<16,6>
+      ReuseFactor: 8
+    conv2d_4_relu:
+      Precision: ap_fixed<16,6>
+      ReuseFactor: 8
+      table_size: 1024
+      table_t: ap_fixed<18,8>
+    conv2d_5:
+      Precision:
+        bias: ap_fixed<16,6>
+        result: ap_fixed<16,6>
+        weight: ap_fixed<16,6>
+      ReuseFactor: 8
+    conv2d_5_relu:
+      Precision: ap_fixed<16,6>
+      ReuseFactor: 8
+      table_size: 1024
+      table_t: ap_fixed<18,8>
+    conv2d_6:
+      Precision:
+        bias: ap_fixed<16,6>
+        result: ap_fixed<16,6>
+        weight: ap_fixed<16,6>
+      ReuseFactor: 8
+    conv2d_6_linear:
+      Precision: ap_fixed<16,6>
+      ReuseFactor: 8
+      table_size: 1024
+      table_t: ap_fixed<18,8>
+    conv2d_relu:
+      Precision: ap_fixed<16,6>
+      ReuseFactor: 8
+      table_size: 1024
+      table_t: ap_fixed<18,8>
+    input_1:
+      Precision:
+        result: ap_fixed<16,6>
+      ReuseFactor: 8
+  Model:
+    BramFactor: 0
+    Precision: ap_fixed<16,6>
+    ReuseFactor: 8
+    Strategy: Resource
+IOType: io_stream
+InputData: null
+KerasModel: !keras_model 'axi_master_qresource_rf8/keras_model.h5'
+OutputDir: axi_master_qresource_rf8
+OutputPredictions: null
+Part: xc7z020clg400-1
+ProjectName: myproject
+Stamp: b3ff5CdD
