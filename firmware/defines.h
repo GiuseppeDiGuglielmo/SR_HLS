@@ -54,6 +54,14 @@
 #define OUT_WIDTH_14 680
 #define N_FILT_14 27
 
+#define OUT_HEIGHT_MERGE 216
+#define OUT_WIDTH_MERGE 680
+#define N_CHAN_MERGE 27
+
+#define OUT_HEIGHT_DTS 648
+#define OUT_WIDTH_DTS 2040
+#define N_CHAN_DTS 3
+
 //hls-fpga-machine-learning insert layer-precision
 typedef ap_fixed<16,6> model_default_t;
 typedef nnet::array<ap_fixed<16,6>, 3*1> input_t;
@@ -94,7 +102,7 @@ typedef ap_fixed<16,6> conv2d_5_bias_t;
 typedef ap_fixed<18,8> conv2d_5_relutable_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 27*1> layer13_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 27*1> layer22_t;
-typedef nnet::array<ap_fixed<16,6>, 27*1> result_t;
+
 typedef nnet::array<ap_fixed<16,6>, 27*1> layer14_t;
 typedef ap_fixed<16,6> conv2d_6_weight_t;
 typedef ap_fixed<16,6> conv2d_6_bias_t;
@@ -102,5 +110,7 @@ typedef ap_fixed<16,6> conv2d_6_bias_t;
 typedef nnet::array<ap_fixed<16,6>, 27*1> layer_up_t;
 
 typedef nnet::array<ap_fixed<16,6>, 27*1> layer_merge_t;
+
+typedef nnet::array<ap_ufixed<8, 8, AP_RND, AP_SAT>, 3> result_t;
 
 #endif

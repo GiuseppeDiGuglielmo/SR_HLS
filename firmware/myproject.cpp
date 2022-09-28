@@ -165,4 +165,6 @@ void myproject(
     hls::stream<layer_merge_t> layer_merge_out("layer_merge_out");
     nnet::add<layer_up_t, layer14_t, layer_merge_t, config_merge>(layer_up, layer14_out, layer_merge_out); // teacher_layer_skip
 
+    nnet::depth_to_space<layer_merge_t, result_t, config_dts>(layer_merge_out, result);
+
 }

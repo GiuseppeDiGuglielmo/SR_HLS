@@ -15,6 +15,7 @@
 #include "nnet_utils/nnet_upsample_stream.h"
 #include "nnet_utils/nnet_merge.h"
 #include "nnet_utils/nnet_merge_stream.h"
+#include "nnet_utils/nnet_depthtospace_stream.h"
 
 //hls-fpga-machine-learning insert weights
 
@@ -479,6 +480,14 @@ struct config_upsample : nnet::upsample_channels_config {
 
 struct config_merge : nnet::merge_config {
     static const unsigned n_elem = OUT_HEIGHT_14*OUT_WIDTH_14*N_FILT_14;
+};
+
+struct config_dts : nnet::depth_to_space_config
+{
+    static const unsigned height = OUT_HEIGHT_MERGE;
+    static const unsigned width = OUT_WIDTH_MERGE;
+    static const unsigned n_chan = N_CHAN_MERGE;
+    static const unsigned block_size = 3;
 };
 
 #endif
