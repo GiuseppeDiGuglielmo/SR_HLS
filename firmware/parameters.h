@@ -472,6 +472,11 @@ struct config14 : nnet::conv2d_config {
 };
 const ap_uint<config14::filt_height * config14::filt_width> config14::pixels[] = {1,3,7,6,4,9,27,63,54,36,73,219,511,438,292,72,216,504,432,288,64,192,448,384,256};
 
+struct config_upsample : nnet::upsample_channels_config {
+    static const unsigned height = N_INPUT_1_1;
+    static const unsigned width = N_INPUT_2_1;
+};
+
 struct config_merge : nnet::merge_config {
     static const unsigned n_elem = OUT_HEIGHT_14*OUT_WIDTH_14*N_FILT_14;
 };

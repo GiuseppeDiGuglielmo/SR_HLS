@@ -160,7 +160,7 @@ void myproject(
 
     // the other branch
     hls::stream<layer_up_t> layer_up("layer_up");
-    nnet::upsample_channels<input_t, layer_up_t>(input1_cpy2, layer_up);
+    nnet::upsample_channels<input_t, layer_up_t, config_upsample>(input1_cpy2, layer_up);
 
     hls::stream<layer_merge_t> layer_merge_out("layer_merge_out");
     nnet::add<layer_up_t, layer14_t, layer_merge_t, config_merge>(layer_up, layer14_out, layer_merge_out); // teacher_layer_skip
