@@ -63,53 +63,54 @@
 #define N_CHAN_DTS 3
 
 //hls-fpga-machine-learning insert layer-precision
-typedef ap_fixed<16,6> model_default_t;
-typedef nnet::array<ap_fixed<16,6>, 3*1> input_t;
-typedef nnet::array<ap_fixed<16,6>, 3*1> layer16_t;
-typedef nnet::array<ap_fixed<16,6>, 28*1> layer2_t;
-typedef ap_fixed<16,6> conv2d_weight_t;
-typedef ap_fixed<16,6> conv2d_bias_t;
-typedef ap_fixed<18,8> conv2d_relutable_t;
+typedef ap_fixed<16,10> model_default_t;
+typedef ap_fixed<18,12> relutable_default_t;
+typedef nnet::array<model_default_t, 3*1> input_t;
+typedef nnet::array<model_default_t, 3*1> layer16_t;
+typedef nnet::array<model_default_t, 28*1> layer2_t;
+typedef model_default_t conv2d_weight_t;
+typedef model_default_t conv2d_bias_t;
+typedef relutable_default_t conv2d_relutable_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 28*1> layer3_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 28*1> layer17_t;
-typedef nnet::array<ap_fixed<16,6>, 28*1> layer4_t;
-typedef ap_fixed<16,6> conv2d_1_weight_t;
-typedef ap_fixed<16,6> conv2d_1_bias_t;
-typedef ap_fixed<18,8> conv2d_1_relutable_t;
+typedef nnet::array<model_default_t, 28*1> layer4_t;
+typedef model_default_t conv2d_1_weight_t;
+typedef model_default_t conv2d_1_bias_t;
+typedef relutable_default_t conv2d_1_relutable_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 28*1> layer5_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 28*1> layer18_t;
-typedef nnet::array<ap_fixed<16,6>, 28*1> layer6_t;
-typedef ap_fixed<16,6> conv2d_2_weight_t;
-typedef ap_fixed<16,6> conv2d_2_bias_t;
-typedef ap_fixed<18,8> conv2d_2_relutable_t;
+typedef nnet::array<model_default_t, 28*1> layer6_t;
+typedef model_default_t conv2d_2_weight_t;
+typedef model_default_t conv2d_2_bias_t;
+typedef relutable_default_t conv2d_2_relutable_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 28*1> layer7_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 28*1> layer19_t;
-typedef nnet::array<ap_fixed<16,6>, 28*1> layer8_t;
-typedef ap_fixed<16,6> conv2d_3_weight_t;
-typedef ap_fixed<16,6> conv2d_3_bias_t;
-typedef ap_fixed<18,8> conv2d_3_relutable_t;
+typedef nnet::array<model_default_t, 28*1> layer8_t;
+typedef model_default_t conv2d_3_weight_t;
+typedef model_default_t conv2d_3_bias_t;
+typedef relutable_default_t conv2d_3_relutable_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 28*1> layer9_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 28*1> layer20_t;
-typedef nnet::array<ap_fixed<16,6>, 28*1> layer10_t;
-typedef ap_fixed<16,6> conv2d_4_weight_t;
-typedef ap_fixed<16,6> conv2d_4_bias_t;
-typedef ap_fixed<18,8> conv2d_4_relutable_t;
+typedef nnet::array<model_default_t, 28*1> layer10_t;
+typedef model_default_t conv2d_4_weight_t;
+typedef model_default_t conv2d_4_bias_t;
+typedef relutable_default_t conv2d_4_relutable_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 28*1> layer11_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 28*1> layer21_t;
-typedef nnet::array<ap_fixed<16,6>, 27*1> layer12_t;
-typedef ap_fixed<16,6> conv2d_5_weight_t;
-typedef ap_fixed<16,6> conv2d_5_bias_t;
-typedef ap_fixed<18,8> conv2d_5_relutable_t;
+typedef nnet::array<model_default_t, 27*1> layer12_t;
+typedef model_default_t conv2d_5_weight_t;
+typedef model_default_t conv2d_5_bias_t;
+typedef relutable_default_t conv2d_5_relutable_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 27*1> layer13_t;
 typedef nnet::array<ap_fixed<16,6,AP_RND_CONV,AP_SAT>, 27*1> layer22_t;
 
-typedef nnet::array<ap_fixed<16,6>, 27*1> layer14_t;
-typedef ap_fixed<16,6> conv2d_6_weight_t;
-typedef ap_fixed<16,6> conv2d_6_bias_t;
+typedef nnet::array<model_default_t, 27*1> layer14_t;
+typedef model_default_t conv2d_6_weight_t;
+typedef model_default_t conv2d_6_bias_t;
 
-typedef nnet::array<ap_fixed<16,6>, 27*1> layer_up_t;
+typedef nnet::array<model_default_t, 27*1> layer_up_t;
 
-typedef nnet::array<ap_fixed<16,6>, 27*1> layer_merge_t;
+typedef nnet::array<model_default_t, 27*1> layer_merge_t;
 
 typedef nnet::array<ap_ufixed<8, 8, AP_RND, AP_SAT>, 3> result_t;
 
