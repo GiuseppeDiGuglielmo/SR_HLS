@@ -77,7 +77,7 @@ void myproject(
     #pragma HLS STREAM variable=input1_cpy1 depth=146880
     hls::stream<input_t> input1_cpy2("input1_cpy2");
     #pragma HLS STREAM variable=input1_cpy2 depth=146880
-    nnet::clone_stream<input_t, input_t, 146880>(input_1, input1_cpy1, input1_cpy2); // clone_input_1
+    nnet::clone_stream<input_t, input_t, N_INPUT_1_1*N_INPUT_2_1*N_INPUT_3_1>(input_1, input1_cpy1, input1_cpy2); // clone_input_1
 
     hls::stream<layer16_t> layer16_out("layer16_out");
     #pragma HLS STREAM variable=layer16_out depth=148676
