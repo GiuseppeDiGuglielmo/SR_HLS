@@ -24,12 +24,11 @@ void depth_to_space(
 	assert(datain_T::size % bssq == 0);
 
 	ImageHeight: for (unsigned h = 0; h < CONFIG_T::height; h++) {
-		#pragma HLS PIPELINE
 	
 		datain_T data_in_row[CONFIG_T::width];
 		
 		ImageWidth: for (unsigned w = 0; w < CONFIG_T::width; w++) {
-			#pragma HLS UNROLL
+			//#pragma HLS UNROLL
 			
 			datain_T  in_data = image.read();
 			
@@ -45,6 +44,7 @@ void depth_to_space(
         // trying to do np.transpose(y, (0, 1, 3, 2, 4, 5)), given 0, 1
         TransposeLoop: for (unsigned bh = 0; bh < CONFIG_T::block_size; bh++) {
             for (unsigned w = 0; w < CONFIG_T::width; w++) {
+                //#pragma HLS PIPELINE
                 constexpr unsigned n_rest = CONFIG_T::n_chan - CONFIG_T::block_size;
                 // loop over the rest (4 and 5 in transpose)
                 for (unsigned r = 0; r < n_rest; r++) {
@@ -56,6 +56,7 @@ void depth_to_space(
 
         // now write out
         WriteLoop: for (unsigned i = 0; i < CONFIG_T::width*CONFIG_T::n_chan/dataout_T::size; i++) {
+            //#pragma HLS PIPELINE
             dataout_T out_data;
             for (unsigned newchan = 0; newchan < dataout_T::size; newchan++) {
                 out_data[newchan] = transposed_row[newchan + dataout_T::size * i];
