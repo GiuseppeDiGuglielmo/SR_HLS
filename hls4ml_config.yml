@@ -1,5 +1,5 @@
 Backend: Vivado
-ClockPeriod: 10
+ClockPeriod: 5
 HLSConfig:
   LayerName:
     conv2d:
@@ -93,6 +93,6 @@ InputData: null
 KerasModel: !keras_model 'axi_master_qresource_rf8/keras_model.h5'
 OutputDir: axi_master_qresource_rf8
 OutputPredictions: null
-Part: xc7z020clg400-1
+Part: xcvu9p-flgc2104-2L-e
 ProjectName: myproject
 Stamp: b3ff5CdD

@@ -37,8 +37,10 @@ struct config16 : nnet::padding2d_config {
 struct config2_mult : nnet::dense_config {
     static const unsigned n_in = 27;
     static const unsigned n_out = 28;
-    static const unsigned reuse_factor = 9;
+    static const unsigned reuse_factor = 189;
     static const unsigned strategy = nnet::resource;
+    static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     typedef model_default_t accum_t;
     typedef conv2d_bias_t bias_t;
     typedef conv2d_weight_t weight_t;
@@ -62,8 +64,9 @@ struct config2 : nnet::conv2d_config {
     static const unsigned stride_width = 1;
     static const unsigned out_height = 216;
     static const unsigned out_width = 680;
-    static const unsigned reuse_factor = 9;
+    static const unsigned reuse_factor = 189;
     static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(kernel_size * n_chan * n_filt, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     static const unsigned strategy = nnet::resource;
     static const nnet::conv_implementation implementation = nnet::conv_implementation::linebuffer;
@@ -82,7 +85,7 @@ struct relu_config3 : nnet::activ_config {
     static const unsigned n_in = 4112640;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_stream;
-    static const unsigned reuse_factor = 8;
+    static const unsigned reuse_factor = 252;
     typedef conv2d_relutable_t table_t;
 };
 
@@ -103,8 +106,10 @@ struct config17 : nnet::padding2d_config {
 struct config4_mult : nnet::dense_config {
     static const unsigned n_in = 252;
     static const unsigned n_out = 28;
-    static const unsigned reuse_factor = 7;
+    static const unsigned reuse_factor = 252;
     static const unsigned strategy = nnet::resource;
+    static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     typedef model_default_t accum_t;
     typedef conv2d_1_bias_t bias_t;
     typedef conv2d_1_weight_t weight_t;
@@ -128,8 +133,9 @@ struct config4 : nnet::conv2d_config {
     static const unsigned stride_width = 1;
     static const unsigned out_height = 216;
     static const unsigned out_width = 680;
-    static const unsigned reuse_factor = 7;
+    static const unsigned reuse_factor = 252;
     static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(kernel_size * n_chan * n_filt, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     static const unsigned strategy = nnet::resource;
     static const nnet::conv_implementation implementation = nnet::conv_implementation::linebuffer;
@@ -148,7 +154,7 @@ struct relu_config5 : nnet::activ_config {
     static const unsigned n_in = 4112640;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_stream;
-    static const unsigned reuse_factor = 8;
+    static const unsigned reuse_factor = 252;
     typedef conv2d_1_relutable_t table_t;
 };
 
@@ -169,8 +175,10 @@ struct config18 : nnet::padding2d_config {
 struct config6_mult : nnet::dense_config {
     static const unsigned n_in = 252;
     static const unsigned n_out = 28;
-    static const unsigned reuse_factor = 7;
+    static const unsigned reuse_factor = 252;
     static const unsigned strategy = nnet::resource;
+    static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     typedef model_default_t accum_t;
     typedef conv2d_2_bias_t bias_t;
     typedef conv2d_2_weight_t weight_t;
@@ -194,8 +202,9 @@ struct config6 : nnet::conv2d_config {
     static const unsigned stride_width = 1;
     static const unsigned out_height = 216;
     static const unsigned out_width = 680;
-    static const unsigned reuse_factor = 7;
+    static const unsigned reuse_factor = 252;
     static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(kernel_size * n_chan * n_filt, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     static const unsigned strategy = nnet::resource;
     static const nnet::conv_implementation implementation = nnet::conv_implementation::linebuffer;
@@ -214,7 +223,7 @@ struct relu_config7 : nnet::activ_config {
     static const unsigned n_in = 4112640;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_stream;
-    static const unsigned reuse_factor = 8;
+    static const unsigned reuse_factor = 252;
     typedef conv2d_2_relutable_t table_t;
 };
 
@@ -235,8 +244,10 @@ struct config19 : nnet::padding2d_config {
 struct config8_mult : nnet::dense_config {
     static const unsigned n_in = 252;
     static const unsigned n_out = 28;
-    static const unsigned reuse_factor = 7;
+    static const unsigned reuse_factor = 252;
     static const unsigned strategy = nnet::resource;
+    static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     typedef model_default_t accum_t;
     typedef conv2d_3_bias_t bias_t;
     typedef conv2d_3_weight_t weight_t;
@@ -260,8 +271,9 @@ struct config8 : nnet::conv2d_config {
     static const unsigned stride_width = 1;
     static const unsigned out_height = 216;
     static const unsigned out_width = 680;
-    static const unsigned reuse_factor = 7;
+    static const unsigned reuse_factor = 252;
     static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(kernel_size * n_chan * n_filt, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     static const unsigned strategy = nnet::resource;
     static const nnet::conv_implementation implementation = nnet::conv_implementation::linebuffer;
@@ -280,7 +292,7 @@ struct relu_config9 : nnet::activ_config {
     static const unsigned n_in = 4112640;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_stream;
-    static const unsigned reuse_factor = 8;
+    static const unsigned reuse_factor = 252;
     typedef conv2d_3_relutable_t table_t;
 };
 
@@ -301,8 +313,10 @@ struct config20 : nnet::padding2d_config {
 struct config10_mult : nnet::dense_config {
     static const unsigned n_in = 252;
     static const unsigned n_out = 28;
-    static const unsigned reuse_factor = 7;
+    static const unsigned reuse_factor = 252;
     static const unsigned strategy = nnet::resource;
+    static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     typedef model_default_t accum_t;
     typedef conv2d_4_bias_t bias_t;
     typedef conv2d_4_weight_t weight_t;
@@ -326,8 +340,9 @@ struct config10 : nnet::conv2d_config {
     static const unsigned stride_width = 1;
     static const unsigned out_height = 216;
     static const unsigned out_width = 680;
-    static const unsigned reuse_factor = 7;
+    static const unsigned reuse_factor = 252;
     static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(kernel_size * n_chan * n_filt, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     static const unsigned strategy = nnet::resource;
     static const nnet::conv_implementation implementation = nnet::conv_implementation::linebuffer;
@@ -346,7 +361,7 @@ struct relu_config11 : nnet::activ_config {
     static const unsigned n_in = 4112640;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_stream;
-    static const unsigned reuse_factor = 8;
+    static const unsigned reuse_factor = 252;
     typedef conv2d_4_relutable_t table_t;
 };
 
@@ -367,8 +382,10 @@ struct config21 : nnet::padding2d_config {
 struct config12_mult : nnet::dense_config {
     static const unsigned n_in = 252;
     static const unsigned n_out = 27;
-    static const unsigned reuse_factor = 7;
+    static const unsigned reuse_factor = 252;
     static const unsigned strategy = nnet::resource;
+    static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     typedef model_default_t accum_t;
     typedef conv2d_5_bias_t bias_t;
     typedef conv2d_5_weight_t weight_t;
@@ -392,8 +409,9 @@ struct config12 : nnet::conv2d_config {
     static const unsigned stride_width = 1;
     static const unsigned out_height = 216;
     static const unsigned out_width = 680;
-    static const unsigned reuse_factor = 7;
+    static const unsigned reuse_factor = 252;
     static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(kernel_size * n_chan * n_filt, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     static const unsigned strategy = nnet::resource;
     static const nnet::conv_implementation implementation = nnet::conv_implementation::linebuffer;
@@ -412,7 +430,7 @@ struct relu_config13 : nnet::activ_config {
     static const unsigned n_in = 3965760;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_stream;
-    static const unsigned reuse_factor = 8;
+    static const unsigned reuse_factor = 252;
     typedef conv2d_5_relutable_t table_t;
 };
 
@@ -433,8 +451,10 @@ struct config22 : nnet::padding2d_config {
 struct config14_mult : nnet::dense_config {
     static const unsigned n_in = 243;
     static const unsigned n_out = 27;
-    static const unsigned reuse_factor = 9;
+    static const unsigned reuse_factor = 243;
     static const unsigned strategy = nnet::resource;
+    static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     typedef model_default_t accum_t;
     typedef conv2d_6_bias_t bias_t;
     typedef conv2d_6_weight_t weight_t;
@@ -458,8 +478,9 @@ struct config14 : nnet::conv2d_config {
     static const unsigned stride_width = 1;
     static const unsigned out_height = 216;
     static const unsigned out_width = 680;
-    static const unsigned reuse_factor = 9;
+    static const unsigned reuse_factor = 243;
     static const unsigned n_zeros = 0;
+    static const unsigned multiplier_limit = DIV_ROUNDUP(kernel_size * n_chan * n_filt, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     static const unsigned strategy = nnet::resource;
     static const nnet::conv_implementation implementation = nnet::conv_implementation::linebuffer;
