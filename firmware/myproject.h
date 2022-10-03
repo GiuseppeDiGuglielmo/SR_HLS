@@ -29,7 +29,7 @@
 // Prototype of top level function for C-synthesis
 void myproject(
     hls::stream<input_t> &input_1,
-    hls::stream<result_t> &layer14_out,
+    hls::stream<result_t> &result,
     conv2d_weight_t w2[756], 
     conv2d_bias_t b2[28], 
     conv2d_1_weight_t w4[7056], 

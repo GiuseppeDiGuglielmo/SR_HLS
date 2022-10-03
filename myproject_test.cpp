@@ -55,93 +55,31 @@ namespace nnet {
 
 int main(int argc, char **argv)
 {
-  //load input data from text file
-  std::ifstream fin("tb_data/tb_input_features.dat");
-  //load predictions from text file
-  std::ifstream fpr("tb_data/tb_output_predictions.dat");
+  std::string OUTPUT_DAT = "output.dat";
+  std::ofstream fout(OUTPUT_DAT);
 
-#ifdef RTL_SIM
-  std::string RESULTS_LOG = "tb_data/rtl_cosim_results.log";
-#else
-  std::string RESULTS_LOG = "tb_data/csim_results.log";
-#endif
-  std::ofstream fout(RESULTS_LOG);
+  hls::stream<input_t> input_1("input_1");
+  std::vector<float> in = {
+#include "csv/input.csv"
+  };
+  nnet::copy_data<float, input_t, 0, N_INPUT_1_1*N_INPUT_2_1*N_INPUT_3_1>(in, input_1);
+  hls::stream<result_t> layer14_out("layer14_out");
 
-  std::string iline;
-  std::string pline;
-  int e = 0;
+  std::cout << "INFO: Input image shape : " << N_INPUT_1_1 << "x" << N_INPUT_2_1 << "x" << N_INPUT_3_1 << std::endl;
+  std::cout << "INFO: Input image pixels: " << N_INPUT_1_1*N_INPUT_2_1*N_INPUT_3_1 << std::endl;
 
-  //hls-fpga-machine-learning insert weights
 
-  //hls-fpga-machine-learning insert load weights
+  myproject(input_1,layer14_out,w2,b2,w4,b4,w6,b6,w8,b8,w10,b10,w12,b12,w14,b14);
 
-  if (fin.is_open() && fpr.is_open()) {
-    while ( std::getline(fin,iline) && std::getline (fpr,pline) ) {
-      if (e % CHECKPOINT == 0) std::cout << "Processing input " << e << std::endl;
-      char* cstr=const_cast<char*>(iline.c_str());
-      char* current;
-      std::vector<float> in;
-      current=strtok(cstr," ");
-      while(current!=NULL) {
-        in.push_back(atof(current));
-        current=strtok(NULL," ");
-      }
-      cstr=const_cast<char*>(pline.c_str());
-      std::vector<float> pr;
-      current=strtok(cstr," ");
-      while(current!=NULL) {
-        pr.push_back(atof(current));
-        current=strtok(NULL," ");
-      }
+  //nnet::print_result<result_t, OUT_HEIGHT_14*OUT_WIDTH_14*N_FILT_14>(layer14_out, std::cout, true);
 
-      //hls-fpga-machine-learning insert data
-      hls::stream<input_t> input_1("input_1");
-      nnet::copy_data<float, input_t, 0, N_INPUT_1_1*N_INPUT_2_1*N_INPUT_3_1>(in, input_1);
-      hls::stream<result_t> layer14_out("layer14_out");
-
-      //hls-fpga-machine-learning insert top-level-function
-      myproject(input_1,layer14_out,w2,b2,w4,b4,w6,b6,w8,b8,w10,b10,w12,b12,w14,b14);
-
-      if (e % CHECKPOINT == 0) {
-        std::cout << "Predictions" << std::endl;
-        //hls-fpga-machine-learning insert predictions
-        for(int i = 0; i < OUT_HEIGHT_14*OUT_WIDTH_14*N_FILT_14; i++) {
-          std::cout << pr[i] << " ";
-        }
-        std::cout << std::endl;
-        std::cout << "Quantized predictions" << std::endl;
-        //hls-fpga-machine-learning insert quantized
-        nnet::print_result<result_t, OUT_HEIGHT_14*OUT_WIDTH_14*N_FILT_14>(layer14_out, std::cout, true);
-      }
-      e++;
-
-      //hls-fpga-machine-learning insert tb-output
-      nnet::print_result<result_t, OUT_HEIGHT_14*OUT_WIDTH_14*N_FILT_14>(layer14_out, fout);
-
-    }
-    fin.close();
-    fpr.close();
-  } else {
-    std::cout << "INFO: Unable to open input/predictions file, using default input." << std::endl;
-
-    //hls-fpga-machine-learning insert zero
-    hls::stream<input_t> input_1("input_1");
-    nnet::fill_zero<input_t, N_INPUT_1_1*N_INPUT_2_1*N_INPUT_3_1>(input_1);
-    hls::stream<result_t> layer14_out("layer14_out");
-
-    //hls-fpga-machine-learning insert top-level-function
-    myproject(input_1,layer14_out,w2,b2,w4,b4,w6,b6,w8,b8,w10,b10,w12,b12,w14,b14);
-
-    //hls-fpga-machine-learning insert output
-    nnet::print_result<result_t, OUT_HEIGHT_14*OUT_WIDTH_14*N_FILT_14>(layer14_out, std::cout, true);
-
-    //hls-fpga-machine-learning insert tb-output
-    nnet::print_result<result_t, OUT_HEIGHT_14*OUT_WIDTH_14*N_FILT_14>(layer14_out, fout);
-
-  }
-
+  nnet::print_result<result_t, OUT_HEIGHT_DTS*OUT_WIDTH_DTS*N_CHAN_DTS>(layer14_out, fout);
   fout.close();
-  std::cout << "INFO: Saved inference results to file: " << RESULTS_LOG << std::endl;
+
+  std::cout << "INFO: Output image shape : " << OUT_HEIGHT_DTS << "x" << OUT_WIDTH_DTS << "x" << N_CHAN_DTS << std::endl;
+  std::cout << "INFO: Output image pixels: " << OUT_HEIGHT_DTS*OUT_WIDTH_DTS*N_CHAN_DTS << std::endl;
+
+  std::cout << "INFO: Saved inference results to file: " << OUTPUT_DAT << std::endl;
 
   return 0;
 }
