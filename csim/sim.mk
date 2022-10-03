@@ -66,7 +66,8 @@ CXX_SOURCES += $(subst $(MODEL_DIR)/firmware/,,$(wildcard $(MODEL_DIR)/firmware/
 .SUFFIXES: .cpp .h .o
 
 trim-trailing-space:
-	sed --in-place 's/[[:space:]]\+$$//' $(DATA_FILE)
+	@echo "INFO: Remove trailing spaces from $(DATA_FILE)"
+	@sed --in-place 's/[[:space:]]\+$$//' $(DATA_FILE)
 .PHONY: trim-trailing-space
 
 dat2jpg:
