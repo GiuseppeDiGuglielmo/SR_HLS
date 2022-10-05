@@ -22,6 +22,7 @@ void depth_to_space(
 ) {
     constexpr unsigned bssq = CONFIG_T::block_size * CONFIG_T::block_size;
 	assert(datain_T::size % bssq == 0);
+    constexpr unsigned n_rest = CONFIG_T::n_chan / (CONFIG_T::block_size * CONFIG_T::block_size) + CONFIG_T::block_size;
 
 	ImageHeight: for (unsigned h = 0; h < CONFIG_T::height; h++) {
 	
@@ -45,7 +46,6 @@ void depth_to_space(
         TransposeLoop: for (unsigned bh = 0; bh < CONFIG_T::block_size; bh++) {
             for (unsigned w = 0; w < CONFIG_T::width; w++) {
                 //#pragma HLS PIPELINE
-                constexpr unsigned n_rest = CONFIG_T::n_chan - CONFIG_T::block_size;
                 // loop over the rest (4 and 5 in transpose)
                 for (unsigned r = 0; r < n_rest; r++) {
                     const unsigned idx = r + n_rest * (w + CONFIG_T::width * bh);
