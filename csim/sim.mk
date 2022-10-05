@@ -60,7 +60,8 @@ VPATH += $(MODEL_DIR)/firmware/weights
 VPATH += $(MODEL_DIR)/nnet_utils
 
 CXX_SOURCES :=
-CXX_SOURCES += $(subst $(MODEL_DIR)/,,$(wildcard $(MODEL_DIR)/*.cpp))
+#CXX_SOURCES += $(subst $(MODEL_DIR)/,,$(wildcard $(MODEL_DIR)/*.cpp))
+CXX_SOURCES += myproject_test.cpp
 CXX_SOURCES += $(subst $(MODEL_DIR)/firmware/,,$(wildcard $(MODEL_DIR)/firmware/*.cpp))
 
 .SUFFIXES: .cpp .h .o
