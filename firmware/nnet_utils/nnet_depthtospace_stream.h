@@ -22,7 +22,7 @@ void depth_to_space(
 ) {
     constexpr unsigned bssq = CONFIG_T::block_size * CONFIG_T::block_size;
 	assert(datain_T::size % bssq == 0);
-    constexpr unsigned n_rest = (CONFIG_T::n_chan / (CONFIG_T::block_size * CONFIG_T::block_size)) * CONFIG_T::block_size;
+    constexpr unsigned n_rest = CONFIG_T::n_chan / CONFIG_T::block_size;
 
 	ImageHeight: for (unsigned h = 0; h < CONFIG_T::height; h++) {
 	
@@ -41,11 +41,12 @@ void depth_to_space(
 		}
 
         typename dataout_T::value_type transposed_row[CONFIG_T::width*CONFIG_T::n_chan];
+        #pragma HLS ARRAY_PARTITION variable=transposed_row cyclic factor=n_rest dim=0
 
         // trying to do np.transpose(y, (0, 1, 3, 2, 4, 5)), given 0, 1
         TransposeLoop: for (unsigned bh = 0; bh < CONFIG_T::block_size; bh++) {
             for (unsigned w = 0; w < CONFIG_T::width; w++) {
-                //#pragma HLS PIPELINE
+                #pragma HLS PIPELINE
                 // loop over the rest (4 and 5 in transpose)
                 for (unsigned r = 0; r < n_rest; r++) {
                     const unsigned idx = r + n_rest * (w + CONFIG_T::width * bh);
@@ -56,7 +57,7 @@ void depth_to_space(
 
         // now write out
         WriteLoop: for (unsigned i = 0; i < CONFIG_T::width*CONFIG_T::n_chan/dataout_T::size; i++) {
-            //#pragma HLS PIPELINE
+            #pragma HLS PIPELINE
             dataout_T out_data;
             for (unsigned newchan = 0; newchan < dataout_T::size; newchan++) {
                 out_data[newchan] = transposed_row[newchan + dataout_T::size * i];
