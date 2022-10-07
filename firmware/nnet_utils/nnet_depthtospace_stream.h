@@ -22,7 +22,7 @@ void depth_to_space(
 ) {
     constexpr unsigned bssq = CONFIG_T::block_size * CONFIG_T::block_size;
 	assert(datain_T::size % bssq == 0);
-    constexpr unsigned n_rest = CONFIG_T::n_chan / (CONFIG_T::block_size * CONFIG_T::block_size) + CONFIG_T::block_size;
+    constexpr unsigned n_rest = (CONFIG_T::n_chan / (CONFIG_T::block_size * CONFIG_T::block_size)) * CONFIG_T::block_size;
 
 	ImageHeight: for (unsigned h = 0; h < CONFIG_T::height; h++) {
 	
