@@ -80,79 +80,79 @@ void myproject(
     nnet::clone_stream<input_t, input_t, N_INPUT_1_1*N_INPUT_2_1*N_INPUT_3_1>(input_1, input1_cpy1, input1_cpy2); // clone_input_1
 
     hls::stream<layer16_t> layer16_out("layer16_out");
-    #pragma HLS STREAM variable=layer16_out depth=148676
+    #pragma HLS STREAM variable=layer16_out depth=146550
     nnet::zeropad2d_cl<input_t, layer16_t, config16>(input1_cpy1, layer16_out); // zp2d_conv2d
 
     hls::stream<layer2_t> layer2_out("layer2_out");
-    #pragma HLS STREAM variable=layer2_out depth=146880
+    #pragma HLS STREAM variable=layer2_out depth=1
     nnet::conv_2d_cl<layer16_t, layer2_t, config2>(layer16_out, layer2_out, w2, b2); // conv2d
 
     hls::stream<layer3_t> layer3_out("layer3_out");
-    #pragma HLS STREAM variable=layer3_out depth=146880
+    #pragma HLS STREAM variable=layer3_out depth=1
     nnet::relu<layer2_t, layer3_t, relu_config3>(layer2_out, layer3_out); // conv2d_relu
 
     hls::stream<layer17_t> layer17_out("layer17_out");
-    #pragma HLS STREAM variable=layer17_out depth=148676
+    #pragma HLS STREAM variable=layer17_out depth=36329
     nnet::zeropad2d_cl<layer3_t, layer17_t, config17>(layer3_out, layer17_out); // zp2d_conv2d_1
 
     hls::stream<layer4_t> layer4_out("layer4_out");
-    #pragma HLS STREAM variable=layer4_out depth=146880
+    #pragma HLS STREAM variable=layer4_out depth=1
     nnet::conv_2d_cl<layer17_t, layer4_t, config4>(layer17_out, layer4_out, w4, b4); // conv2d_1
 
     hls::stream<layer5_t> layer5_out("layer5_out");
-    #pragma HLS STREAM variable=layer5_out depth=146880
+    #pragma HLS STREAM variable=layer5_out depth=1
     nnet::relu<layer4_t, layer5_t, relu_config5>(layer4_out, layer5_out); // conv2d_1_relu
 
     hls::stream<layer18_t> layer18_out("layer18_out");
-    #pragma HLS STREAM variable=layer18_out depth=148676
+    #pragma HLS STREAM variable=layer18_out depth=678
     nnet::zeropad2d_cl<layer5_t, layer18_t, config18>(layer5_out, layer18_out); // zp2d_conv2d_2
 
     hls::stream<layer6_t> layer6_out("layer6_out");
-    #pragma HLS STREAM variable=layer6_out depth=146880
+    #pragma HLS STREAM variable=layer6_out depth=1
     nnet::conv_2d_cl<layer18_t, layer6_t, config6>(layer18_out, layer6_out, w6, b6); // conv2d_2
 
     hls::stream<layer7_t> layer7_out("layer7_out");
-    #pragma HLS STREAM variable=layer7_out depth=146880
+    #pragma HLS STREAM variable=layer7_out depth=1
     nnet::relu<layer6_t, layer7_t, relu_config7>(layer6_out, layer7_out); // conv2d_2_relu
 
     hls::stream<layer19_t> layer19_out("layer19_out");
-    #pragma HLS STREAM variable=layer19_out depth=148676
+    #pragma HLS STREAM variable=layer19_out depth=678
     nnet::zeropad2d_cl<layer7_t, layer19_t, config19>(layer7_out, layer19_out); // zp2d_conv2d_3
 
     hls::stream<layer8_t> layer8_out("layer8_out");
-    #pragma HLS STREAM variable=layer8_out depth=146880
+    #pragma HLS STREAM variable=layer8_out depth=1
     nnet::conv_2d_cl<layer19_t, layer8_t, config8>(layer19_out, layer8_out, w8, b8); // conv2d_3
 
     hls::stream<layer9_t> layer9_out("layer9_out");
-    #pragma HLS STREAM variable=layer9_out depth=146880
+    #pragma HLS STREAM variable=layer9_out depth=1
     nnet::relu<layer8_t, layer9_t, relu_config9>(layer8_out, layer9_out); // conv2d_3_relu
 
     hls::stream<layer20_t> layer20_out("layer20_out");
-    #pragma HLS STREAM variable=layer20_out depth=148676
+    #pragma HLS STREAM variable=layer20_out depth=678
     nnet::zeropad2d_cl<layer9_t, layer20_t, config20>(layer9_out, layer20_out); // zp2d_conv2d_4
 
     hls::stream<layer10_t> layer10_out("layer10_out");
-    #pragma HLS STREAM variable=layer10_out depth=146880
+    #pragma HLS STREAM variable=layer10_out depth=1
     nnet::conv_2d_cl<layer20_t, layer10_t, config10>(layer20_out, layer10_out, w10, b10); // conv2d_4
 
     hls::stream<layer11_t> layer11_out("layer11_out");
-    #pragma HLS STREAM variable=layer11_out depth=146880
+    #pragma HLS STREAM variable=layer11_out depth=1
     nnet::relu<layer10_t, layer11_t, relu_config11>(layer10_out, layer11_out); // conv2d_4_relu
 
     hls::stream<layer21_t> layer21_out("layer21_out");
-    #pragma HLS STREAM variable=layer21_out depth=148676
+    #pragma HLS STREAM variable=layer21_out depth=678
     nnet::zeropad2d_cl<layer11_t, layer21_t, config21>(layer11_out, layer21_out); // zp2d_conv2d_5
 
     hls::stream<layer12_t> layer12_out("layer12_out");
-    #pragma HLS STREAM variable=layer12_out depth=146880
+    #pragma HLS STREAM variable=layer12_out depth=1
     nnet::conv_2d_cl<layer21_t, layer12_t, config12>(layer21_out, layer12_out, w12, b12); // conv2d_5
 
     hls::stream<layer13_t> layer13_out("layer13_out");
-    #pragma HLS STREAM variable=layer13_out depth=146880
+    #pragma HLS STREAM variable=layer13_out depth=1
     nnet::relu<layer12_t, layer13_t, relu_config13>(layer12_out, layer13_out); // conv2d_5_relu
 
     hls::stream<layer22_t> layer22_out("layer22_out");
-    #pragma HLS STREAM variable=layer22_out depth=148676
+    #pragma HLS STREAM variable=layer22_out depth=7937
     nnet::zeropad2d_cl<layer13_t, layer22_t, config22>(layer13_out, layer22_out); // zp2d_conv2d_6
 
     hls::stream<layer14_t> layer14_out("layer14_out");
