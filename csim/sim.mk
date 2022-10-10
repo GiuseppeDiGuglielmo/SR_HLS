@@ -26,6 +26,7 @@ TARGET_ARCH = linux64
 INCDIR :=
 INCDIR += -I$(MODEL_DIR)/py
 INCDIR += -I$(MODEL_DIR)/firmware/nnet_utils/
+INCDIR += -I$(MODEL_DIR)/firmware/ap_types/
 INCDIR += -I$(MODEL_DIR)/firmware
 INCDIR += -I$(MODEL_DIR)/firmware/weights
 INCDIR += -I$(XILINX_VIVADO)/include
