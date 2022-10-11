@@ -16,6 +16,7 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
+#include <experimental/filesystem>
 #include <fstream>
 #include <iostream>
 #include <algorithm>
@@ -79,7 +80,7 @@ int main(int argc, char **argv)
   std::cout << "INFO: Output image shape : " << OUT_HEIGHT_DTS << "x" << OUT_WIDTH_DTS << "x" << N_CHAN_DTS << std::endl;
   std::cout << "INFO: Output image pixels: " << OUT_HEIGHT_DTS*OUT_WIDTH_DTS*N_CHAN_DTS << std::endl;
 
-  std::cout << "INFO: Saved inference results to file: " << OUTPUT_DAT << std::endl;
+  std::cout << "INFO: Saved inference results to file: " << std::experimental::filesystem::current_path().string() + "/" + OUTPUT_DAT << std::endl;
 
   return 0;
 }

@@ -108,9 +108,9 @@ typedef nnet::array<model_default_t, 27*1> layer14_t;
 typedef model_default_t conv2d_6_weight_t;
 typedef model_default_t conv2d_6_bias_t;
 
-typedef nnet::array<model_default_t, 27*1> layer_up_t;
+typedef nnet::array<model_default_t, 27*1> layer23_t;
 
-typedef nnet::array<model_default_t, 27*1> layer_merge_t;
+typedef nnet::array<model_default_t, 27*1> layer24_t;
 
 typedef nnet::array<ap_ufixed<8, 8, AP_RND, AP_SAT>, 3> result_t;
 

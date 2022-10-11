@@ -73,15 +73,15 @@ void myproject(
 
     //hls-fpga-machine-learning insert layers
 
-    hls::stream<input_t> input1_cpy1("input1_cpy1");
-    #pragma HLS STREAM variable=input1_cpy1 depth=146880
-    hls::stream<input_t> input1_cpy2("input1_cpy2");
-    #pragma HLS STREAM variable=input1_cpy2 depth=1048576
-    nnet::clone_stream<input_t, input_t, N_INPUT_1_1*N_INPUT_2_1*N_INPUT_3_1>(input_1, input1_cpy1, input1_cpy2); // clone_input_1
+    hls::stream<input_t> layer0_out("layer0_out");
+    #pragma HLS STREAM variable=layer0_out depth=146880
+    hls::stream<input_t> layer1_out("layer1_out");
+    #pragma HLS STREAM variable=layer1_out depth=1048576
+    nnet::clone_stream<input_t, input_t, N_INPUT_1_1*N_INPUT_2_1*N_INPUT_3_1>(input_1, layer0_out, layer1_out); // clone_input_1
 
     hls::stream<layer16_t> layer16_out("layer16_out");
     #pragma HLS STREAM variable=layer16_out depth=146550
-    nnet::zeropad2d_cl<input_t, layer16_t, config16>(input1_cpy1, layer16_out); // zp2d_conv2d
+    nnet::zeropad2d_cl<input_t, layer16_t, config16>(layer0_out, layer16_out); // zp2d_conv2d
 
     hls::stream<layer2_t> layer2_out("layer2_out");
     #pragma HLS STREAM variable=layer2_out depth=1
@@ -156,15 +156,18 @@ void myproject(
     nnet::zeropad2d_cl<layer13_t, layer22_t, config22>(layer13_out, layer22_out); // zp2d_conv2d_6
 
     hls::stream<layer14_t> layer14_out("layer14_out");
+    #pragma HLS STREAM variable=layer14_out depth=1
     nnet::conv_2d_cl<layer22_t, layer14_t, config14>(layer22_out, layer14_out, w14, b14); // conv2d_6
 
     // the other branch
-    hls::stream<layer_up_t> layer_up("layer_up");
-    nnet::upsample_channels<input_t, layer_up_t, config_upsample>(input1_cpy2, layer_up);
+    hls::stream<layer23_t> layer23_out("layer23_out");
+    #pragma HLS STREAM variable=layer14_out depth=1
+    nnet::upsample_channels<input_t, layer23_t, config_upsample>(layer1_out, layer23_out);
 
-    hls::stream<layer_merge_t> layer_merge_out("layer_merge_out");
-    nnet::add<layer_up_t, layer14_t, layer_merge_t, config_merge>(layer_up, layer14_out, layer_merge_out); // teacher_layer_skip
+    hls::stream<layer24_t> layer24_out("layer24_out");
+    #pragma HLS STREAM variable=layer14_out depth=1
+    nnet::add<layer23_t, layer14_t, layer24_t, config_merge>(layer23_out, layer14_out, layer24_out); // teacher_layer_skip
 
-    nnet::depth_to_space<layer_merge_t, result_t, config_dts>(layer_merge_out, result);
+    nnet::depth_to_space<layer24_t, result_t, config_dts>(layer24_out, result);
 
 }
