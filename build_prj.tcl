@@ -170,7 +170,7 @@ create_clock -period $clock_period -name default
 if {$opt(csim)} {
     puts "***** C SIMULATION *****"
     set time_start [clock clicks -milliseconds]
-    csim_design
+    csim_design -ldflags {-lstdc++fs}
     set time_end [clock clicks -milliseconds]
     report_time "C SIMULATION" $time_start $time_end
 }
@@ -189,7 +189,7 @@ if {$opt(cosim)} {
     add_files -tb ${project_name}_test.cpp -cflags "-std=c++0x -DRTL_SIM"
     set time_start [clock clicks -milliseconds]
 
-    cosim_design -trace_level all -setup
+    cosim_design -trace_level all -setup -ldflags {-lstdc++fs}
 
     if {$opt(fifo_opt)} {
         puts "\[hls4ml\] - FIFO optimization started"
