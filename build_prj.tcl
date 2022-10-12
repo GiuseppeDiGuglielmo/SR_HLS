@@ -3,9 +3,9 @@
 #################
 array set opt {
     reset      0
-    csim       0
+    csim       1
     synth      1
-    cosim      0
+    cosim      1
     validation 0
     export     0
     vsynth     0
@@ -170,7 +170,7 @@ create_clock -period $clock_period -name default
 if {$opt(csim)} {
     puts "***** C SIMULATION *****"
     set time_start [clock clicks -milliseconds]
-    csim_design -ldflags {-lstdc++fs}
+    csim_design -ldflags "-lstdc++fs"
     set time_end [clock clicks -milliseconds]
     report_time "C SIMULATION" $time_start $time_end
 }
@@ -189,11 +189,12 @@ if {$opt(cosim)} {
     add_files -tb ${project_name}_test.cpp -cflags "-std=c++0x -DRTL_SIM"
     set time_start [clock clicks -milliseconds]
 
-    cosim_design -trace_level all -setup -ldflags {-lstdc++fs}
-
     if {$opt(fifo_opt)} {
+        cosim_design -trace_level all -setup -ldflags "-lstdc++fs"
         puts "\[hls4ml\] - FIFO optimization started"
         add_vcd_instructions_tcl
+    } else {
+        cosim_design -trace_level none -setup -ldflags "-lstdc++fs"
     }
 
     remove_recursive_log_wave

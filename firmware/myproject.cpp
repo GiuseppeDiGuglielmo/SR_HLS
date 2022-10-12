@@ -74,9 +74,9 @@ void myproject(
     //hls-fpga-machine-learning insert layers
 
     hls::stream<input_t> layer0_out("layer0_out");
-    #pragma HLS STREAM variable=layer0_out depth=146880
+    #pragma HLS STREAM variable=layer0_out depth=1111
     hls::stream<input_t> layer1_out("layer1_out");
-    #pragma HLS STREAM variable=layer1_out depth=1048576
+    #pragma HLS STREAM variable=layer1_out depth=146877
     nnet::clone_stream<input_t, input_t, N_INPUT_1_1*N_INPUT_2_1*N_INPUT_3_1>(input_1, layer0_out, layer1_out); // clone_input_1
 
     hls::stream<layer16_t> layer16_out("layer16_out");
