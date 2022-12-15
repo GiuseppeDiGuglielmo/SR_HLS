@@ -6,10 +6,6 @@ hls:
 	vivado_hls build_prj.tcl
 .PHONY: hls
 
-#hls-gui:
-#	vivado_hls build_prj.tcl -gui
-#.PHONY: hls-gui
-
 gui:
 	vivado_hls -p myproject_prj
 .PHONY: gui
@@ -26,5 +22,5 @@ fifo-opt:
 
 clean:
 	@rm -rf myproject_prj
-	@rm -f vivado.jou vivado.log vivado_hls.log
+	@rm -f *.jou *.log *.rpt
 .PHONY: clean
