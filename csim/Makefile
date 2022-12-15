@@ -2,7 +2,7 @@
 
 MODEL = myproject
 MODEL_DIR = ..
-DATA_FILE = output.dat
-IMG_FILE = output.jpg
+DATA_FILE = 0001.dat
+IMG_FILE = 0001.jpg
 
 -include sim.mk

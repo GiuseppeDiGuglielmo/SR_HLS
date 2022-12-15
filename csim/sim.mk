@@ -50,6 +50,7 @@ CXX_FLAGS += -D__WEIGHTS_DIR__=$(WEIGHTS_DIR)
 
 LD_FLAGS :=
 LD_FLAGS += -lm
+LD_FLAGS += -lstdc++fs
 
 LD_LIBS :=
 
