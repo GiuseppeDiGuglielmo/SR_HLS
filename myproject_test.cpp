@@ -56,12 +56,12 @@ namespace nnet {
 
 int main(int argc, char **argv)
 {
-  std::string OUTPUT_DAT = "output.dat";
+  std::string OUTPUT_DAT = "0001.dat";
   std::ofstream fout(OUTPUT_DAT);
 
   hls::stream<input_t> input_1("input_1");
   std::vector<float> in = {
-#include "csv/input.csv"
+#include "csv/inputs/0001x3.csv"
   };
   nnet::copy_data<float, input_t, 0, N_INPUT_1_1*N_INPUT_2_1*N_INPUT_3_1>(in, input_1);
   hls::stream<result_t> layer14_out("layer14_out");

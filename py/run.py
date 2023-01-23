@@ -14,40 +14,44 @@ import solvers.networks.base7
 if __name__ == '__main__':
 
     SCALE=3
-    IMG_COUNT=10
+    IMG_COUNT=800
 
-    print('INFO: Load: ./jpg/input.jpg')
-    img = cv2.imread('./jpg/input.jpg')
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    img = np.expand_dims(img, axis=0) # This is to add one more dimension, batch = 1
+    for i in range(IMG_COUNT):
+        img_id = str(i+1)
+        img_id = img_id.zfill(4)
 
-    print('INFO: Save: ./npy/input.npy')
-    np.save('./npy/input.npy', img[0])
+        print('INFO: Load: ./png/inputs/' + img_id + 'x3.png')
+        img = cv2.imread('./png/inputs/' + img_id + 'x3.png')
+        #img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # This is necessary with JPEG images only
+        img = np.expand_dims(img, axis=0) # This is to add one more dimension, batch = 1
 
-    print('INFO: Save: ./csv/input.csv')
-    f = open('csv/input.csv', 'w')
-    writer = csv.writer(f)
-    writer.writerow(img[0].flatten())
-    f.close()
+        print('INFO: Save: ./npy/inputs/' + img_id + 'x3.npy')
+        np.save('./npy/inputs/' + img_id + 'x3.npy', img[0])
 
-    # Load pre-trained model (.PB)
-    MODEL_DIR = './model/best_status'
-    model = tf.keras.models.load_model(MODEL_DIR)
-    #model.summary()
+        print('INFO: Save: ./csv/inputs/' + img_id + 'x3.csv')
+        f = open('csv/inputs/' + img_id + 'x3.csv', 'w')
+        writer = csv.writer(f)
+        writer.writerow(img[0].flatten())
+        f.close()
 
-    # Run model prediction
-    y_keras = model.predict(img)
+        # Load pre-trained model (.PB)
+        MODEL_DIR = './model/best_status'
+        model = tf.keras.models.load_model(MODEL_DIR)
+        #model.summary()
 
-    print('INFO: Save: ./npy/output.npy')
-    np.save('./npy/output', y_keras[0])
+        # Run model prediction
+        y_keras = model.predict(img)
 
-    print('INFO: Save: ./jpg/output.jpg')
-    cv2.imwrite('./jpg/output.jpg', y_keras[0])
+        print('INFO: Save: ./npy/outputs/' + img_id + '.npy')
+        np.save('./npy/outputs/' + img_id, y_keras[0])
 
-    print('INFO: Save: ./csv/output.csv')
-    f = open('csv/output.csv', 'w')
-    writer = csv.writer(f)
-    writer.writerow(y_keras[0].flatten())
-    f.close()
+        print('INFO: Save: ./png/outputs/' + img_id + '.png')
+        cv2.imwrite('./png/outputs/' + img_id + '.png', y_keras[0])
+
+        print('INFO: Save: ./csv/outputs/' + img_id + '.csv')
+        f = open('csv/outputs/' + img_id + '.csv', 'w')
+        writer = csv.writer(f)
+        writer.writerow(y_keras[0].flatten())
+        f.close()
 
 
